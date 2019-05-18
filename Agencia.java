@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Agencia {
-    private ArrayList<Projeto> projetos = new ArrayList<>();
+    private static ArrayList<Projeto> projetos = new ArrayList<Projeto>();
 
 
     public void addProjeto(Projeto projeto) {
@@ -20,6 +19,16 @@ public class Agencia {
         }
         return -1;//nao achou
     }
+    private int buscarNum(int codigo) {
+        for (int i = 0; i < projetos.size(); i++) {
+            Projeto projeto = projetos.get(i);
+            int codProjeto = projeto.getCodigo();
+            if (codigo == codProjeto) {
+                return i;
+            }
+        }
+        return -1;//nao achou
+    }
 
     public boolean removeProjetos(String nomeX) {
         int posicao = buscar(nomeX);
@@ -30,17 +39,20 @@ public class Agencia {
             return false;
         }
     }
-
-
-    public void addProjeto(String nome, double duracao, String titulo, int codigo, String areaPesquisa) {
-        Projeto projeto = new Projeto();
-        projeto.setProjetos(nome);
-        projeto.setDuracao(duracao);
-        projeto.setTitulo(titulo);
-        projeto.setCodigo(codigo);
-        projeto.setAreaPesquisa(areaPesquisa);
-        addProjeto(projeto);
+    public boolean listarCod(int codigo) {
+        int posicao = buscarNum(codigo);
+        if (posicao >= 0) {
+            JOptionPane.showMessageDialog(null, projetos.get(toString(projetos)));
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    private int toString(ArrayList<Projeto> projetos) {
+        return 0;
+    }
+
 
     public void listarProjetos() {
         for (Projeto projeto : projetos) {
@@ -48,25 +60,17 @@ public class Agencia {
         }
     }
 
-    public int buscarNum(int codigo) {
-        for (int i = 0; i < projetos.size(); i++) {
-            Projeto projeto = projetos.get(i);
-            int codProjeto = projeto.getCodigo();
-            if (Objects.equals(codigo, codProjeto)) {
-                return i;
-            }
+
+    public boolean status(int codigo, String status){
+        int posicao = buscarNum(codigo);
+        if(posicao >= 0){
+            Projeto projeto = projetos.get(posicao);
+            projeto.setStatus(status);
+            projetos.set(codigo,projeto);
+            return true;
+        } else {
+            return false;
         }
-        return -1;//nao achou
     }
 
-    public void listarProjetosN(int nomex) {
-        for (int i = 0; i < projetos.size(); i++) {
-            int posicao = buscarNum(nomex);
-            if (posicao > 0) {
-                Projeto projeto = projetos.get(posicao);
-                JOptionPane.showMessageDialog(null, posicao);
-            }
-        }
-
-
-
+}

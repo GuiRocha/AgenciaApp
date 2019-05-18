@@ -9,6 +9,7 @@ public class AreaConhecimento {
 
     public AreaConhecimento(GrandeAreaConhecimento conhecimento) {
         this.conhecimento = conhecimento;
+
     }
     public String getNome(){
         return nome;

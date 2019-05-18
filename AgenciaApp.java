@@ -3,7 +3,7 @@ import javax.swing.*;
 public class AgenciaApp {
     public static void main(String[] args) {
         Agencia agencia = new Agencia();
-        Projeto projeto;
+        Projeto projeto = new Projeto();
 
         int menu;
         do {
@@ -43,8 +43,8 @@ public class AgenciaApp {
             } else if (menu == 2) {
                 agencia.listarProjetos();
             } else if (menu == 3) {
-                int nomex = Integer.parseInt(JOptionPane.showInputDialog("Código para listar: "));
-                if (agencia.listarProjetosN(nomex)){
+                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código para listar: "));
+                if (agencia.listarCod(codigo)){
                     JOptionPane.showInputDialog("Digite o código: ");
                 }
             } else if (menu == 4) {
