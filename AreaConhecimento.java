@@ -5,12 +5,20 @@ public class AreaConhecimento {
 
     private GrandeAreaConhecimento conhecimento;
 
-    public AreaConhecimento() {}
+    public AreaConhecimento() {
+
+
+    }
 
     public AreaConhecimento(GrandeAreaConhecimento conhecimento) {
         this.conhecimento = conhecimento;
 
     }
+
+    public AreaConhecimento(String idGrandeA, String descGrandeA) {
+
+    }
+
     public String getNome(){
         return nome;
     }

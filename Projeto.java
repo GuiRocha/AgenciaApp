@@ -8,6 +8,9 @@ public class Projeto {
 
     private AreaConhecimento area;
 
+    public Projeto(String nome, double duracao, String titulo, int codigo, String areaPesquisa) {
+    }
+
 
     public String getProjetos() {
         return projetos;
@@ -63,8 +66,8 @@ public class Projeto {
     public String toString() {
         return "Projeto : " + projetos + "\nDuracao : " + duracao+ "hs  " + "\nTitulo : " + titulo +
                 "\nCodigo : " + codigo + "\nArea de Pesquisa : " + areaPesquisa + "\nStatus: " + this.getStatus() +
-                "\nGrande área: " + area.getConhecimento().getNome() + " Descrição: " + area.getConhecimento().getDescricao() +
-                "\nArea: " + area.getNome() + " Descrição: " + area.getDescricao();
+                "\nGrande área: " + area.getConhecimento().getId() + " Descrição: " + area.getConhecimento().getDescricao() +
+                "\nArea: " + area.getId() + " Descrição: " + area.getDescricao();
     }
 
     public void setStatus(String status){

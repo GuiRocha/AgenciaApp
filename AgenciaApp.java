@@ -3,7 +3,7 @@ import javax.swing.*;
 public class AgenciaApp {
     public static void main(String[] args) {
         Agencia agencia = new Agencia();
-        Projeto projeto = new Projeto();
+        Projeto projeto;
 
         int menu;
         do {
@@ -14,29 +14,16 @@ public class AgenciaApp {
                 String titulo = JOptionPane.showInputDialog("titulo do projeto: ");
                 int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto: "));
                 String areaPesquisa = JOptionPane.showInputDialog("Qual é a área de pesquisa do seu projeto: ");
-                String gConhecimento = JOptionPane.showInputDialog("Grande área de conhecimento: ");
-                String areaConhecimento = JOptionPane.showInputDialog("Área de conhecimento: ");
-                String descricaoG = JOptionPane.showInputDialog("Descricao(Grande área de conhecimento:): ");
-                String descricaoArea = JOptionPane.showInputDialog("Descricao(Área de conhecimento:): ");
-                projeto.setTitulo(titulo);
-                projeto.setDuracao(duracao);
-                projeto.setCodigo(codigo);
-                projeto.setProjetos(nome);
-                projeto.setAreaPesquisa(areaPesquisa);
+                String idGrandeA = JOptionPane.showInputDialog("Grande área de conhecimento: ");
+                String idArea = JOptionPane.showInputDialog("Área de conhecimento: ");
+                String descGrandeA = JOptionPane.showInputDialog("Descricao(Grande área de conhecimento:): ");
+                String descArea = JOptionPane.showInputDialog("Descricao(Área de conhecimento:): ");
 
-                GrandeAreaConhecimento grandeConhecimento = new GrandeAreaConhecimento();
-                grandeConhecimento.setDescricao(descricaoG);
-                grandeConhecimento.setId(codigo);
-                grandeConhecimento.setNome(gConhecimento);
+                projeto = new Projeto(nome, duracao, titulo, codigo, areaPesquisa);
 
+                AreaConhecimento conhecimento = new AreaConhecimento(idGrandeA, descGrandeA);
 
-                AreaConhecimento conhecimento = new AreaConhecimento(grandeConhecimento);
-                conhecimento.setId(codigo);
-                conhecimento.setDescricao(descricaoArea);
-                conhecimento.setNome(areaConhecimento);
-
-
-                projeto.setArea(conhecimento);
+                GrandeAreaConhecimento grandeConhecimento = new GrandeAreaConhecimento(idArea, descArea, conhecimento);
 
 
                 agencia.addProjeto(projeto);
