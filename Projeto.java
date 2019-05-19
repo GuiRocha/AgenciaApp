@@ -60,7 +60,8 @@ public class Projeto {
         return "Projeto : " + nome + "\nDuracao : " + duracao+ "hs  " +
                 "\nCodigo : " + codigo + "\nArea de Pesquisa : " + areaPesquisa + "\nStatus: " + this.getStatus() +
                 "\nGrande área ID: " + this.conhecimento.getId() + " Descrição: " + this.conhecimento.getDescricao() +
-                "\nArea ID: " + this.conhecimento.getConhecimento().getId() + " Descrição: " + this.conhecimento.getConhecimento().getDescricao();
+                "\nArea ID: " + this.conhecimento.getConhecimento().getId() + " Descrição: " + this.conhecimento.getConhecimento().getDescricao() +
+                "\nGrande área: " + conhecimento.getId() + " Desc: ";
     }
 
     public void setStatus(String status){

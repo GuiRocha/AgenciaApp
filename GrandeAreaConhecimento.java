@@ -29,4 +29,8 @@ public class GrandeAreaConhecimento {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public String toString() {
+        return "ID: " + id + " Desc: " + descricao;
+    }
 }
