@@ -10,18 +10,18 @@ public class AgenciaApp {
             menu = Integer.parseInt(JOptionPane.showInputDialog("1 add projeto \n2 Listar Projetos\n3 listar por numero\n4 Excluir projetos\n5 Atualizar resultado do projeto \n6  sair"));
             if (menu == 1) {
                 String nome = JOptionPane.showInputDialog("Nome do projeto: ");
-                double duracao = Double.parseDouble(JOptionPane.showInputDialog("Duração do projeto(EM HORAS): "));
+                double duracao = Double.parseDouble(JOptionPane.showInputDialog("Duraï¿½ï¿½o do projeto(EM HORAS): "));
 
-                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto: "));
-                String areaPesquisa = JOptionPane.showInputDialog("Qual é a área de pesquisa do seu projeto: ");
-                String idGrandeA = JOptionPane.showInputDialog("ID Grande área de conhecimento: ");
-                String idArea = JOptionPane.showInputDialog("ID Área de conhecimento: ");
-                String descGrandeA = JOptionPane.showInputDialog("Descricao(Grande área de conhecimento:): ");
-                String descArea = JOptionPane.showInputDialog("Descricao(Área de conhecimento:): ");
+                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Cï¿½digo do projeto: "));
+                String areaPesquisa = JOptionPane.showInputDialog("Qual ï¿½ a ï¿½rea de pesquisa do seu projeto: ");
+                String idGrandeA = JOptionPane.showInputDialog("ID Grande ï¿½rea de conhecimento: ");
+                String idArea = JOptionPane.showInputDialog("ID ï¿½rea de conhecimento: ");
+                String descGrandeA = JOptionPane.showInputDialog("Descricao(Grande ï¿½rea de conhecimento:): ");
+                String descArea = JOptionPane.showInputDialog("Descricao(ï¿½rea de conhecimento:): ");
 
                 AreaConhecimento conhecimento = new AreaConhecimento(Integer.valueOf(idArea), descArea);
 
-                GrandeAreaConhecimento grandeConhecimento = new GrandeAreaConhecimento(Integer.valueOf(idGrandeA), descArea, conhecimento);
+                GrandeAreaConhecimento grandeConhecimento = new GrandeAreaConhecimento(Integer.valueOf(idGrandeA), descGrandeA, conhecimento);
 
                 projeto = new Projeto(nome, duracao, codigo, areaPesquisa, null, grandeConhecimento);
 
@@ -29,12 +29,12 @@ public class AgenciaApp {
             } else if (menu == 2) {
                 agencia.listarProjetos();
             } else if (menu == 3) {
-                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código para listar: "));
+                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Cï¿½digo para listar: "));
                 if (agencia.listarCod(codigo)){
-                    JOptionPane.showInputDialog("Digite o código: ");
+                    JOptionPane.showInputDialog("Digite o cï¿½digo: ");
                 }
             } else if (menu == 4) {
-                String nomeX = JOptionPane.showInputDialog("Código para remover:");
+                String nomeX = JOptionPane.showInputDialog("Cï¿½digo para remover:");
                 if (agencia.removeProjetos(nomeX)) {
                     JOptionPane.showMessageDialog(null, "Removido");
                 } else {
@@ -44,7 +44,7 @@ public class AgenciaApp {
             } else if (menu == 5) {
                 String status = JOptionPane.showInputDialog(
                         "Atualize o status(Aprovado - Reprovado): ");
-                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto para atualizar:"));
+                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Cï¿½digo do projeto para atualizar:"));
 
                 if (agencia.status(codigo, status)) {
                     JOptionPane.showMessageDialog(null,
