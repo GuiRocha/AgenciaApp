@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Agencia {
-    private static ArrayList<Projeto> projetos = new ArrayList<Projeto>();
+    private static ArrayList<Projeto> projetos = new ArrayList<>();
 
 
     public void addProjeto(Projeto projeto) {
@@ -12,7 +12,7 @@ public class Agencia {
     private int buscar(String nomeX) {
         for (int i = 0; i < projetos.size(); i++) {
             Projeto projeto = projetos.get(i);
-            String nomeProjeto = projeto.getProjetos();
+            String nomeProjeto = projeto.getNome();
             if (nomeX.equals(nomeProjeto)) {
                 return i;
             }
@@ -49,17 +49,15 @@ public class Agencia {
         }
     }
 
-    private int toString(ArrayList<Projeto> projetos) {
-        return 0;
-    }
-
-
     public void listarProjetos() {
         for (Projeto projeto : projetos) {
             JOptionPane.showMessageDialog(null, projeto);
         }
     }
 
+    private int toString(ArrayList<Projeto> projetos) {
+        return 0;
+    }
 
     public boolean status(int codigo, String status){
         int posicao = buscarNum(codigo);

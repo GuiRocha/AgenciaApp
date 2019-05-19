@@ -1,13 +1,17 @@
 public class GrandeAreaConhecimento {
+
     private int id;
     private String descricao;
-     public GrandeAreaConhecimento(int id, String descricao){
-         this.id = id;
-         this.descricao = descricao;
-     }
+    private AreaConhecimento conhecimento;
 
-    public GrandeAreaConhecimento(String idArea, String descArea, AreaConhecimento conhecimento) {
+    public GrandeAreaConhecimento(int id, String descricao, AreaConhecimento conhecimento) {
+        this.id = id;
+        this.descricao = descricao;
+        this.conhecimento = conhecimento;
+    }
 
+    public AreaConhecimento getConhecimento() {
+        return conhecimento;
     }
 
     public int getId() {
@@ -24,8 +28,5 @@ public class GrandeAreaConhecimento {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-    public String toString() {
-         return "Id: "+ id + "Descrição: " + descricao;
     }
 }
