@@ -1,27 +1,22 @@
 public class Projeto {
-    private String projetos;
+    private String nome;
     private double duracao;
-    private String titulo;
     private int codigo;
     private String areaPesquisa;
     private String status;
+    private GrandeAreaConhecimento conhecimento;
+    public Projeto(String nome, double duracao, int codigo, String areaPesquisa, GrandeAreaConhecimento conhecimento) {
 
-    private AreaConhecimento area;
-
-    public Projeto(String nome, double duracao, String titulo, int codigo, String areaPesquisa) {
     }
 
 
-    public String getProjetos() {
-        return projetos;
+
+    public String getNome() {
+        return nome;
     }
 
     public double getDuracao() {
         return duracao;
-    }
-
-    public String getTitulo() {
-        return titulo;
     }
 
     public int getCodigo() {
@@ -39,16 +34,12 @@ public class Projeto {
         }
         return status;
     }
-    public void setProjetos(String projetos) {
-        this.projetos = projetos;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public void setDuracao(Double duracao) {
         this.duracao = duracao;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
     }
 
     public void setCodigo(int codigo) {
@@ -59,15 +50,11 @@ public class Projeto {
         this.areaPesquisa = areaPesquisa;
     }
 
-    public void setArea(AreaConhecimento area) {
-        this.area = area;
-    }
 
     public String toString() {
-        return "Projeto : " + projetos + "\nDuracao : " + duracao+ "hs  " + "\nTitulo : " + titulo +
+        return "Projeto : " + nome + "\nDuracao : " + duracao+ "hs  " +
                 "\nCodigo : " + codigo + "\nArea de Pesquisa : " + areaPesquisa + "\nStatus: " + this.getStatus() +
-                "\nGrande área: " + area.getConhecimento().getId() + " Descrição: " + area.getConhecimento().getDescricao() +
-                "\nArea: " + area.getId() + " Descrição: " + area.getDescricao();
+                "\nGrande área: " + conhecimento.getId() + " Desc: ";
     }
 
     public void setStatus(String status){

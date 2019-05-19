@@ -11,7 +11,7 @@ public class AgenciaApp {
             if (menu == 1) {
                 String nome = JOptionPane.showInputDialog("Nome do projeto: ");
                 double duracao = Double.parseDouble(JOptionPane.showInputDialog("Duração do projeto(EM HORAS): "));
-                String titulo = JOptionPane.showInputDialog("titulo do projeto: ");
+                //String titulo = JOptionPane.showInputDialog("titulo do projeto: ");
                 int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto: "));
                 String areaPesquisa = JOptionPane.showInputDialog("Qual é a área de pesquisa do seu projeto: ");
                 String idGrandeA = JOptionPane.showInputDialog("Grande área de conhecimento: ");
@@ -19,12 +19,13 @@ public class AgenciaApp {
                 String descGrandeA = JOptionPane.showInputDialog("Descricao(Grande área de conhecimento:): ");
                 String descArea = JOptionPane.showInputDialog("Descricao(Área de conhecimento:): ");
 
-                projeto = new Projeto(nome, duracao, titulo, codigo, areaPesquisa);
+
 
                 AreaConhecimento conhecimento = new AreaConhecimento(idGrandeA, descGrandeA);
 
-                GrandeAreaConhecimento grandeConhecimento = new GrandeAreaConhecimento(idArea, descArea, conhecimento);
 
+                GrandeAreaConhecimento grandeConhecimento = new GrandeAreaConhecimento(idArea, descArea, conhecimento);
+                projeto = new Projeto(nome, duracao,codigo, areaPesquisa, grandeConhecimento);
 
                 agencia.addProjeto(projeto);
             } else if (menu == 2) {
