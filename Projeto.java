@@ -1,3 +1,8 @@
+import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class Projeto {
 
     private String nome;
@@ -71,6 +76,91 @@ public class Projeto {
         } else {
 //trunca se for maior
             this.status = status.substring(0, 144);
+        }
+    }
+    public void incluir(Connection conn) {
+        String sqlInsert =
+                "INSERT INTO projeto(codigo, nome, duracao, areaPesquisa) VALUES (?, ?, ?,?,?)";
+        PreparedStatement stm = null;
+        try {
+            stm = conn.prepareStatement(sqlInsert);
+            stm.setInt(1, getCodigo());
+            stm.setString(2, getNome());
+            stm.setInt(3, (int) getDuracao());
+            stm.setString(4, getAreaPesquisa());
+            stm.setString(5, getStatus());
+            stm.setInt(6, conhecimento.getId());
+            stm.setString(7, conhecimento.getDescricao());
+
+            stm.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                JOptionPane.showMessageDialog(null, e1.getStackTrace());
+            }
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e1) {
+                    JOptionPane.showMessageDialog(null, e1.getStackTrace());
+                }
+            }
+        }
+    }
+            public void excluir(Connection conn) {
+                //VICTOR String sqlDelete = "DELETE FROM LIVRO WHERE idLivro = ?";
+                PreparedStatement stm = null;
+                try {
+                    stm = conn.prepareStatement(sqlDelete);
+                    stm.setInt(1, getCodigo());
+
+                    stm.execute();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    try {
+                        conn.rollback();
+                    } catch (SQLException e1) {
+                        System.out.print(e1.getStackTrace());
+                    }
+                } finally {
+                    if (stm != null) {
+                        try {
+                            stm.close();
+                        } catch (SQLException e1) {
+                            System.out.print(e1.getStackTrace());
+                        }
+                    }
+                }
+            }
+            public void listar(Connection conn){
+                String sqlUpdate =
+                     //VICTOR   "UPDATE PROJETOS SET nome = ?, Edicao = ? WHERE IdLivro = ?";
+                PreparedStatement stm = null;
+                try {
+                    stm = conn.prepareStatement(sqlUpdate);
+                    stm.setInt(1,(int) getCodigo());
+                    stm.setString(2, getNome());
+                    stm.setInt(3,(int) getDuracao());
+                    stm.setString(4, getAreaPesquisa());
+                    stm.setString(5, getStatus());
+                    stm.execute();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    try {
+                        conn.rollback();
+                    } catch (SQLException e1) {
+                        System.out.print(e1.getStackTrace());
+                    }
+                } finally {
+                    if (stm != null) {
+                        try {
+                            stm.close();
+                        } catch (SQLException e1) {
+                            System.out.print(e1.getStackTrace());
+                        }
         }
     }
 }

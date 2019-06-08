@@ -11,7 +11,6 @@ public class AgenciaApp {
             if (menu == 1) {
                 String nome = JOptionPane.showInputDialog("Nome do projeto: ");
                 double duracao = Double.parseDouble(JOptionPane.showInputDialog("Duração do projeto(EM HORAS): "));
-                //String titulo = JOptionPane.showInputDialog("titulo do projeto: ");
                 int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto: "));
                 String areaPesquisa = JOptionPane.showInputDialog("Qual é a área de pesquisa do seu projeto: ");
                 String idGrandeA = JOptionPane.showInputDialog("Grande área de conhecimento: ");

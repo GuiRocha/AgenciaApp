@@ -1,5 +1,9 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Agencia {
     private static ArrayList<Projeto> projetos = new ArrayList<>();
