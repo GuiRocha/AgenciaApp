@@ -10,13 +10,13 @@ public class AgenciaApp {
             menu = Integer.parseInt(JOptionPane.showInputDialog("1 add projeto \n2 Listar Projetos\n3 listar por numero\n4 Excluir projetos\n5 Atualizar resultado do projeto \n6  sair"));
             if (menu == 1) {
                 String nome = JOptionPane.showInputDialog("Nome do projeto: ");
-                double duracao = Double.parseDouble(JOptionPane.showInputDialog("Duração do projeto(EM HORAS): "));
-                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto: "));
-                String areaPesquisa = JOptionPane.showInputDialog("Qual é a área de pesquisa do seu projeto: ");
-                String idGrandeA = JOptionPane.showInputDialog("Grande área de conhecimento: ");
-                String idArea = JOptionPane.showInputDialog("Área de conhecimento: ");
-                String descGrandeA = JOptionPane.showInputDialog("Descricao(Grande área de conhecimento:): ");
-                String descArea = JOptionPane.showInputDialog("Descricao(Área de conhecimento:): ");
+                double duracao = Double.parseDouble(JOptionPane.showInputDialog("DuraÃ§Ã£o do projeto(EM HORAS): "));
+                int codigo = Integer.parseInt(JOptionPane.showInputDialog("CÃ³digo do projeto: "));
+                String areaPesquisa = JOptionPane.showInputDialog("Qual Ã© a Ã¡rea de pesquisa do seu projeto: ");
+                String idGrandeA = JOptionPane.showInputDialog("Grande Ã¡rea de conhecimento: ");
+                String idArea = JOptionPane.showInputDialog("Ã¡rea de conhecimento: ");
+                String descGrandeA = JOptionPane.showInputDialog("Descricao(Grande Ã¡rea de conhecimento:): ");
+                String descArea = JOptionPane.showInputDialog("Descricao(Ã¡rea de conhecimento:): ");
 
                 AreaConhecimento conhecimento = new AreaConhecimento(Integer.valueOf(idArea), descArea);
 
@@ -28,12 +28,12 @@ public class AgenciaApp {
             } else if (menu == 2) {
                 agencia.listarProjetos();
             } else if (menu == 3) {
-                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Cï¿½digo para listar: "));
+                int codigo = Integer.parseInt(JOptionPane.showInputDialog("CÃ³digo para listar: "));
                 if (agencia.listarCod(codigo)){
-                    JOptionPane.showInputDialog("Digite o cï¿½digo: ");
+                    JOptionPane.showInputDialog("Digite o cÃ³digo: ");
                 }
             } else if (menu == 4) {
-                String nomeX = JOptionPane.showInputDialog("Cï¿½digo para remover:");
+                String nomeX = JOptionPane.showInputDialog("CÃ³digo para remover:");
                 if (agencia.removeProjetos(nomeX)) {
                     JOptionPane.showMessageDialog(null, "Removido");
                 } else {
@@ -43,7 +43,7 @@ public class AgenciaApp {
             } else if (menu == 5) {
                 String status = JOptionPane.showInputDialog(
                         "Atualize o status(Aprovado - Reprovado): ");
-                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Cï¿½digo do projeto para atualizar:"));
+                int codigo = Integer.parseInt(JOptionPane.showInputDialog("CÃ³digo do projeto para atualizar:"));
 
                 if (agencia.status(codigo, status)) {
                     JOptionPane.showMessageDialog(null,

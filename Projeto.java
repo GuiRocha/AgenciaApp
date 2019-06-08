@@ -111,7 +111,7 @@ public class Projeto {
         }
     }
             public void excluir(Connection conn) {
-                //VICTOR String sqlDelete = "DELETE FROM LIVRO WHERE idLivro = ?";
+                 String sqlDelete = "DELETE FROM projeto WHERE CÓDIGO_INTERNO = ?";
                 PreparedStatement stm = null;
                 try {
                     stm = conn.prepareStatement(sqlDelete);
@@ -137,12 +137,12 @@ public class Projeto {
             }
             public void listar(Connection conn){
                 String sqlUpdate =
-                     //VICTOR   "UPDATE PROJETOS SET nome = ?, Edicao = ? WHERE IdLivro = ?";
+                     "UPDATE projetos SET nome = ?, codigo_interno = ?, duracao = ? WHERE codigo_interno = ?";
                 PreparedStatement stm = null;
                 try {
                     stm = conn.prepareStatement(sqlUpdate);
-                    stm.setInt(1,(int) getCodigo());
                     stm.setString(2, getNome());
+                    stm.setInt(1,(int) getCodigo());
                     stm.setInt(3,(int) getDuracao());
                     stm.setString(4, getAreaPesquisa());
                     stm.setString(5, getStatus());
