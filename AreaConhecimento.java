@@ -1,6 +1,8 @@
 public class AreaConhecimento {
     private int id;
     private String descricao;
+    private GrandeAreaConhecimento conhecimento;
+
 
     public AreaConhecimento(int id, String descricao) {
         this.id = id;
@@ -18,5 +20,8 @@ public class AreaConhecimento {
     }
     public void setDescricao (String descricao){
         this.descricao = descricao;
+    }
+    public GrandeAreaConhecimento getConhecimento(){
+        return this.conhecimento;
     }
 }
