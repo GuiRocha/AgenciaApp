@@ -22,4 +22,5 @@ public class Conexao {
                 .getConnection("jdbc:mysql://" + servidor + ":" + porta +
                         "/" + database + "?user=" + usuario + "&password=" + senha);
     }
+
 }

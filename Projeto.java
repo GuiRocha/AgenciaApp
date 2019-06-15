@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class Projeto {
@@ -66,7 +69,7 @@ public class Projeto {
                 "\nCodigo : " + codigo + "\nArea de Pesquisa : " + areaPesquisa + "\nStatus: " + this.getStatus() +
                 "\nGrande área ID: " + this.conhecimento.getId() + " Descrição: " + this.conhecimento.getDescricao() +
                 "\nArea ID: " + this.conhecimento.getId() + " Descrição: " + this.conhecimento.getDescricao();
-                //"\nGrande área: " + conhecimento.getId() + " Desc: "
+        //"\nGrande área: " + conhecimento.getId() + " Desc: "
     }
 
     public void setStatus(String status) {
@@ -79,6 +82,71 @@ public class Projeto {
         }
     }
 
+    public void listar(Connection conn) {
+        String sqlSelect =
+                "SELECT Nome , Duracao FROM projetos WHERE codigo_interno = ?";
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            stm = conn.prepareStatement(sqlSelect);
+            stm.setInt(1, getCodigo());
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                this.setNome(rs.getString(1));
+                this.setDuracao(rs.getDouble(2));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                System.out.print(e1.getStackTrace());
+            }
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e1) {
+                    System.out.print(e1.getStackTrace());
+                }
+            }
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e1) {
+                    System.out.print(e1.getStackTrace());
+                }
+            }
+        }
+    }
+
+    /*public void excluir(Connection conn) {
+        String sqlDelete = "DELETE FROM Projetos WHERE codigo_interno = ?";
+        PreparedStatement stm = null;
+        try {
+            stm = conn.prepareStatement(sqlDelete);
+            stm.setInt(1, getCodigo());
+
+            stm.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                System.out.print(e1.getStackTrace());
+            }
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e1) {
+                    System.out.print(e1.getStackTrace());
+                }
+            }
+        }
+    }
+*/
     public void incluir(Connection conn) {
         String sqlInsert =
                 "INSERT INTO Projetos(NOME,DURACAO,AVALIADOR_CPF,PESQUISADOR_CPF,CODIGO_INTERNO,\n" +

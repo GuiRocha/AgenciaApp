@@ -7,15 +7,16 @@ public class AgenciaApp {
         Agencia agencia = new Agencia();
         Projeto projeto;
         Connection conn = null;
-
         int menu;
-            Conexao bd = new Conexao();
-            conn = bd.conectar();
+        Conexao bd = new Conexao();
+        conn = bd.conectar();
+
             do {
                 menu = Integer.parseInt(JOptionPane.showInputDialog("1 add projeto \n2 Listar Projetos\n3 listar por numero\n4 Excluir projetos\n5 Atualizar resultado do projeto \n6  sair"));
-                if (menu == 1) {
+
+                if (menu == 2) {
                     String nome = JOptionPane.showInputDialog("Nome do projeto: ");
-                    double duracao = Double.parseDouble(JOptionPane.showInputDialog("Duração do projeto(EM HORAS): "));
+                    Double duracao = Double.parseDouble(JOptionPane.showInputDialog("Duração do projeto(EM HORAS): "));
                     int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto: "));
                     String areaPesquisa = JOptionPane.showInputDialog("Qual é a área de pesquisa do seu projeto: ");
                     //String idGrandeA = JOptionPane.showInputDialog("Grande área de conhecimento: ");
@@ -30,8 +31,11 @@ public class AgenciaApp {
                     projeto = new Projeto(nome, duracao, codigo, areaPesquisa);
 
                     projeto.incluir(conn);
-                } else if (menu == 2) {
-                    agencia.listarProjetos();
+                } else if (menu == 1) {
+
+                    projeto.listar(conn);
+                    JOptionPane.showMessageDialog(null, projeto);
+
                 } else if (menu == 3) {
                     int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código para listar: "));
                     if (agencia.listarCod(codigo)) {
