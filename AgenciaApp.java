@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public class AgenciaApp {
     public static void main(String[] args) throws SQLException {
         Agencia agencia = new Agencia();
-        Projeto projeto;
+        Projeto projeto = null;
         Connection conn = null;
         int menu;
         Conexao bd = new Conexao();
@@ -14,7 +14,7 @@ public class AgenciaApp {
             do {
                 menu = Integer.parseInt(JOptionPane.showInputDialog("1 add projeto \n2 Listar Projetos\n3 listar por numero\n4 Excluir projetos\n5 Atualizar resultado do projeto \n6  sair"));
 
-                if (menu == 2) {
+                if (menu == 1) {
                     String nome = JOptionPane.showInputDialog("Nome do projeto: ");
                     Double duracao = Double.parseDouble(JOptionPane.showInputDialog("Duração do projeto(EM HORAS): "));
                     int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto: "));
@@ -31,9 +31,9 @@ public class AgenciaApp {
                     projeto = new Projeto(nome, duracao, codigo, areaPesquisa);
 
                     projeto.incluir(conn);
-                } else if (menu == 1) {
+                } else if (menu == 2) {
 
-                    projeto.listar(conn);
+                    projeto.carregar(conn);
                     JOptionPane.showMessageDialog(null, projeto);
 
                 } else if (menu == 3) {

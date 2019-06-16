@@ -81,10 +81,9 @@ public class Projeto {
             this.status = status.substring(0, 144);
         }
     }
+    public void carregar(Connection conn) {
+        String sqlSelect = "SELECT nome, codigo_interno, duracao, AreaPesquisa FROM projetos WHERE codigo_interno = ?";
 
-    public void listar(Connection conn) {
-        String sqlSelect =
-                "SELECT Nome , Duracao FROM projetos WHERE codigo_interno = ?";
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
@@ -92,8 +91,10 @@ public class Projeto {
             stm.setInt(1, getCodigo());
             rs = stm.executeQuery();
             if (rs.next()) {
-                this.setNome(rs.getString(1));
-                this.setDuracao(rs.getDouble(2));
+                setNome(rs.getString(1));
+                setCodigo(rs.getInt(2));
+                setDuracao(rs.getDouble(3));
+                setAreaPesquisa(rs.getString(4));
 
             }
         } catch (Exception e) {
@@ -120,33 +121,6 @@ public class Projeto {
             }
         }
     }
-
-    /*public void excluir(Connection conn) {
-        String sqlDelete = "DELETE FROM Projetos WHERE codigo_interno = ?";
-        PreparedStatement stm = null;
-        try {
-            stm = conn.prepareStatement(sqlDelete);
-            stm.setInt(1, getCodigo());
-
-            stm.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                System.out.print(e1.getStackTrace());
-            }
-        } finally {
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e1) {
-                    System.out.print(e1.getStackTrace());
-                }
-            }
-        }
-    }
-*/
     public void incluir(Connection conn) {
         String sqlInsert =
                 "INSERT INTO Projetos(NOME,DURACAO,AVALIADOR_CPF,PESQUISADOR_CPF,CODIGO_INTERNO,\n" +
@@ -182,7 +156,9 @@ public class Projeto {
                 } catch (SQLException e1) {
                     System.out.print(e1.getStackTrace());
                 }
+
             }
         }
     }
 }
+

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Agencia {
-    private static ArrayList<Projeto> projetos = new ArrayList<>();
 
+    private static ArrayList<Projeto> projetos = new ArrayList<Projeto>();
 
     public void addProjeto(Projeto projeto) {
         projetos.add(projeto);
@@ -74,5 +75,31 @@ public class Agencia {
             return false;
         }
     }
+    public void listarClientes(Connection conn){
+        ArrayList<Projeto> lista = buscarClientes(conn);
+        for(Projeto projeto:lista){
+            System.out.println(projeto);
+        }
+    }
 
+    public ArrayList<Projeto> buscarClientes(Connection conn){
+        String sqlSelect = "SELECT nome, duracao, codigo_interno FROM Projetos";
+        ArrayList<Projeto> lista = new ArrayList<>();
+
+        try(PreparedStatement stm = conn.prepareStatement(sqlSelect);
+            ResultSet rs = stm.executeQuery();){
+            //veja que desta vez foi possivel usar o mesmo try
+            while(rs.next()){
+                Projeto projeto = new Projeto();
+                projeto.setCodigo(rs.getInt("Codigo"));
+                projeto.setNome(rs.getString("nome"));
+                projeto.setDuracao(rs.getDouble("Duracao"));
+                lista.add(projeto);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }
