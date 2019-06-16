@@ -24,6 +24,7 @@ public class Agencia {
         }
         return -1;//nao achou
     }
+
     private int buscarNum(int codigo) {
         for (int i = 0; i < projetos.size(); i++) {
             Projeto projeto = projetos.get(i);
@@ -44,6 +45,7 @@ public class Agencia {
             return false;
         }
     }
+
     public boolean listarCod(int codigo) {
         int posicao = buscarNum(codigo);
         if (posicao >= 0) {
@@ -64,40 +66,42 @@ public class Agencia {
         return 0;
     }
 
-    public boolean status(int codigo, String status){
+    public boolean status(int codigo, String status) {
         int posicao = buscarNum(codigo);
-        if(posicao >= 0){
+        if (posicao >= 0) {
             Projeto projeto = projetos.get(posicao);
             projeto.setStatus(status);
-            projetos.set(codigo,projeto);
+            projetos.set(codigo, projeto);
             return true;
         } else {
             return false;
         }
     }
-    public void listarProjetos(Connection conn){
+
+    public void listarProjetos(Connection conn) {
         ArrayList<Projeto> lista = buscarProjetos(conn);
-        for(Projeto projeto:lista){
+        for (Projeto projeto : lista) {
             System.out.println(projeto);
         }
     }
 
-    public ArrayList<Projeto> buscarProjetos(Connection conn){
-        String sqlSelect = "SELECT nome, duracao, codigo_interno FROM Projetos";
+    public ArrayList<Projeto> buscarProjetos(Connection conn) {
+        String sqlSelect = "SELECT nome, duracao, codigo_interno, area_de_pesquisa FROM Projetos";
         ArrayList<Projeto> lista = new ArrayList<>();
 
-        try(PreparedStatement stm = conn.prepareStatement(sqlSelect);
-            ResultSet rs = stm.executeQuery();){
+        try (PreparedStatement stm = conn.prepareStatement(sqlSelect);
+             ResultSet rs = stm.executeQuery();) {
             //veja que desta vez foi possivel usar o mesmo try
-            while(rs.next()){
-                Projeto projeto = new Projeto();
-                projeto.setCodigo(rs.getInt("Codigo"));
-                projeto.setNome(rs.getString("nome"));
-                projeto.setDuracao(rs.getDouble("Duracao"));
+            while (rs.next()) {
+                Projeto projeto = new Projeto(
+                        rs.getString("Nome"),
+                        rs.getDouble("Duracao"),
+                        rs.getInt("codigo_interno"),
+                        rs.getString("area_de_pesquisa")
+                );
                 lista.add(projeto);
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return lista;

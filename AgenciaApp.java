@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public class AgenciaApp {
     public static void main(String[] args) throws SQLException {
         Agencia agencia = new Agencia();
-        Projeto projeto = null;
+        Projeto projeto = new Projeto();
         Connection conn = null;
         int menu;
         Conexao bd = new Conexao();

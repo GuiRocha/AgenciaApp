@@ -23,6 +23,9 @@ public class Projeto {
         this.conhecimento = conhecimento;
     }
 
+    public Projeto() {
+    }
+
     public String getNome() {
         return nome;
     }
@@ -66,9 +69,9 @@ public class Projeto {
 
     public String toString() {
         return "Projeto : " + nome + "\nDuracao : " + duracao + "hs  " +
-                "\nCodigo : " + codigo + "\nArea de Pesquisa : " + areaPesquisa + "\nStatus: " + this.getStatus() +
-                "\nGrande área ID: " + this.conhecimento.getId() + " Descrição: " + this.conhecimento.getDescricao() +
-                "\nArea ID: " + this.conhecimento.getId() + " Descrição: " + this.conhecimento.getDescricao();
+                "\nCodigo : " + codigo + "\nArea de Pesquisa : " + areaPesquisa + "\nStatus: " + this.getStatus() ;
+                //"\nGrande área ID: " + this.conhecimento.getId() + " Descrição: " + this.conhecimento.getDescricao() +
+                //"\nArea ID: " + this.conhecimento.getId() + " Descrição: " + this.conhecimento.getDescricao();
         //"\nGrande área: " + conhecimento.getId() + " Desc: "
     }
 
@@ -82,7 +85,7 @@ public class Projeto {
         }
     }
     public void carregar(Connection conn) {
-        String sqlSelect = "SELECT nome, codigo_interno, duracao, AreaPesquisa FROM projetos WHERE codigo_interno = ?";
+        String sqlSelect = "SELECT nome, codigo_interno, duracao, area_de_pesquisa FROM Projetos WHERE codigo_interno = ?";
 
         PreparedStatement stm = null;
         ResultSet rs = null;
