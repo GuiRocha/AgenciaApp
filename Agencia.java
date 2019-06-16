@@ -76,7 +76,7 @@ public class Agencia {
         }
     }
     public void listarProjetos(Connection conn){
-        ArrayList<Projeto> lista = buscarClientes(conn);
+        ArrayList<Projeto> lista = buscarProjetos(conn);
         for(Projeto projeto:lista){
             System.out.println(projeto);
         }
