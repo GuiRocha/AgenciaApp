@@ -33,7 +33,7 @@ public class AgenciaApp {
                     projeto.incluir(conn);
                 } else if (menu == 2) {
 
-                    projeto.carregar(conn);
+                    projeto.carregar(conn);//não sei o que vai aqui
                     JOptionPane.showMessageDialog(null, projeto);
 
                 } else if (menu == 3) {

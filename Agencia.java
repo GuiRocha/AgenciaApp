@@ -75,14 +75,14 @@ public class Agencia {
             return false;
         }
     }
-    public void listarClientes(Connection conn){
+    public void listarProjetos(Connection conn){
         ArrayList<Projeto> lista = buscarClientes(conn);
         for(Projeto projeto:lista){
             System.out.println(projeto);
         }
     }
 
-    public ArrayList<Projeto> buscarClientes(Connection conn){
+    public ArrayList<Projeto> buscarProjetos(Connection conn){
         String sqlSelect = "SELECT nome, duracao, codigo_interno FROM Projetos";
         ArrayList<Projeto> lista = new ArrayList<>();
 
