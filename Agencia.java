@@ -1,10 +1,7 @@
 import javax.swing.*;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Agencia {
 
@@ -78,26 +75,52 @@ public class Agencia {
         }
     }
 
-    public void listarProjetos(Connection conn) {
-        ArrayList<Projeto> lista = buscarProjetos(conn);
-        for (Projeto projeto : lista) {
-            System.out.println(projeto);
-        }
+    public ArrayList<Projeto> listarProjetos(Connection conn) {
+        return buscarProjetos(conn);
     }
 
-    public ArrayList<Projeto> buscarProjetos(Connection conn) {
-        String sqlSelect = "SELECT nome, duracao, codigo_interno, area_de_pesquisa FROM Projetos";
+    public Projeto listarProjetoPorCodigo(Connection conn, int codigo) {
+        return buscarProjetosPorCodigo(conn, codigo);
+    }
+
+    private Projeto buscarProjetosPorCodigo(Connection conn, int codigo) {
+        String sqlSelect = "SELECT NOME, DURACAO, CODIGO_INTERNO, AREA_DE_PESQUISA, Resposta_RESULTADO FROM Projetos WHERE codigo_interno = " + codigo;
         ArrayList<Projeto> lista = new ArrayList<>();
+        Projeto projeto = null;
 
         try (PreparedStatement stm = conn.prepareStatement(sqlSelect);
              ResultSet rs = stm.executeQuery();) {
             //veja que desta vez foi possivel usar o mesmo try
             while (rs.next()) {
+                projeto = new Projeto(
+                        rs.getString("NOME"),
+                        rs.getDouble("DURACAO"),
+                        rs.getInt("CODIGO_INTERNO"),
+                        rs.getString("AREA_DE_PESQUISA"),
+                        rs.getString("Resposta_RESULTADO")
+                );
+            }
+        }
+        catch(Exception e){
+                e.printStackTrace();
+            }
+            return projeto;
+        }
+
+    public ArrayList<Projeto> buscarProjetos(Connection conn) {
+        String sqlSelect = "SELECT NOME, DURACAO, CODIGO_INTERNO, AREA_DE_PESQUISA, Resposta_RESULTADO FROM Projetos";
+        ArrayList<Projeto> lista = new ArrayList<>();
+
+        try (PreparedStatement stm = conn.prepareStatement(sqlSelect);
+             ResultSet rs = stm.executeQuery();) {
+
+            while (rs.next()) {
                 Projeto projeto = new Projeto(
-                        rs.getString("Nome"),
-                        rs.getDouble("Duracao"),
-                        rs.getInt("codigo_interno"),
-                        rs.getString("area_de_pesquisa")
+                        rs.getString("NOME"),
+                        rs.getDouble("DURACAO"),
+                        rs.getInt("CODIGO_INTERNO"),
+                        rs.getString("AREA_DE_PESQUISA"),
+                        rs.getString("Resposta_RESULTADO")
                 );
                 lista.add(projeto);
             }
@@ -106,4 +129,11 @@ public class Agencia {
         }
         return lista;
     }
-}
+    public boolean deletarProjetoPorCodigo(Connection conn, int codigo) throws Exception {
+        String delete = "DELETE from Projetos where codigo_interno = " + codigo;
+        Statement statement = conn.createStatement();
+        return statement.execute(delete);
+    }
+
+        //return projeto;
+    }

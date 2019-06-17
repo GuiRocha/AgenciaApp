@@ -23,8 +23,18 @@ public class Projeto {
         this.conhecimento = conhecimento;
     }
 
+    public Projeto(String nome, double duracao, int codigo, String areaPesquisa, String status) {
+        this.nome = nome;
+        this.duracao = duracao;
+        this.codigo = codigo;
+        this.areaPesquisa = areaPesquisa;
+        this.status = status;
+        this.conhecimento = conhecimento;
+    }
+
     public Projeto() {
     }
+
 
     public String getNome() {
         return nome;
@@ -84,46 +94,7 @@ public class Projeto {
             this.status = status.substring(0, 144);
         }
     }
-    public void carregar(Connection conn) {
-        String sqlSelect = "SELECT nome, codigo_interno, duracao, area_de_pesquisa FROM Projetos WHERE codigo_interno = ?";
 
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            stm = conn.prepareStatement(sqlSelect);
-            stm.setInt(1, getCodigo());
-            rs = stm.executeQuery();
-            if (rs.next()) {
-                setNome(rs.getString(1));
-                setCodigo(rs.getInt(2));
-                setDuracao(rs.getDouble(3));
-                setAreaPesquisa(rs.getString(4));
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                System.out.print(e1.getStackTrace());
-            }
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e1) {
-                    System.out.print(e1.getStackTrace());
-                }
-            }
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e1) {
-                    System.out.print(e1.getStackTrace());
-                }
-            }
-        }
-    }
     public void incluir(Connection conn) {
         String sqlInsert =
                 "INSERT INTO Projetos(NOME,DURACAO,AVALIADOR_CPF,PESQUISADOR_CPF,CODIGO_INTERNO,\n" +
