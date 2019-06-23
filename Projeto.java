@@ -102,14 +102,10 @@ public class Projeto {
     }
 
     public boolean atualizar(Connection conn, int codigo, String status) {
-        ArrayList<Projeto> lista = new ArrayList<>();
-        String sqlUpdate = "UPDATE Projetos SET Resposta_RESULTADO = "+ status + " WHERE codigo_interno = " + codigo;
-        Projeto projeto = null;
-        try (PreparedStatement stm = conn.prepareStatement(sqlUpdate);
-
-             ResultSet rs = stm.executeQuery(sqlUpdate);) {
-                    stm.setString(1, getStatus());
-                    stm.execute();
+        String query = String.format("UPDATE Projetos SET Resposta_RESULTADO = '%s' WHERE codigo_interno = %s;", status, codigo);
+        try {
+            Statement statement = conn.createStatement();
+            return statement.execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }

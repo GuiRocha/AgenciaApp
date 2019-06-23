@@ -20,9 +20,7 @@ public class AgenciaApp {
                 Double duracao = Double.parseDouble(JOptionPane.showInputDialog("Duração do projeto(EM HORAS): "));
                 int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto: "));
                 String areaPesquisa = JOptionPane.showInputDialog("Qual é a área de pesquisa do seu projeto: ");
-                //String idGrandeA = JOptionPane.showInputDialog("Grande área de conhecimento: ");
                 String idArea = JOptionPane.showInputDialog("ID área de conhecimento: ");
-                //String descGrandeA = JOptionPane.showInputDialog("Descricao(Grande área de conhecimento:): ");
                 String descArea = JOptionPane.showInputDialog("Descricao(área de conhecimento:): ");
 
                 AreaConhecimento conhecimento = new AreaConhecimento(Integer.valueOf(idArea), descArea);
@@ -40,27 +38,30 @@ public class AgenciaApp {
 
             } else if (menu == 3) {
                 int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código para listar: "));
-                Projeto projota = agencia.listarProjetoPorCodigo(conn, codigo);
-                if (projota == null) {
+                Projeto p1 = agencia.listarProjetoPorCodigo(conn, codigo);
+                if (p1 == null) {
                     JOptionPane.showMessageDialog(null, "Não encontrado");
                 }
 
             } else if (menu == 4) {
                 int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código para remover:"));
-                boolean removed = projeto.deletarProjetoPorCodigo(conn, codigo);
-                if (removed) {
+                boolean remover = projeto.deletarProjetoPorCodigo(conn, codigo);
+                if (remover) {
                     JOptionPane.showMessageDialog(null, "Removido");
                 }
             } else if (menu == 5) {
                 String status = JOptionPane.showInputDialog("Atualize o status(Aprovado - Reprovado): ");
                 int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto para atualizar: "));
-
-                projeto.atualizar(conn, codigo, status);
-                JOptionPane.showMessageDialog(null, "Status atualizado!");
-
+                Projeto projota = agencia.listarProjetoPorCodigo(conn, codigo);
+                if(projota == null) {
+                    JOptionPane.showMessageDialog(null, "Não encontrado");
+                } else {
+                    projeto.atualizar(conn, codigo, status);
+                    JOptionPane.showMessageDialog(null, "Status atualizado!");
+                }
             }
-            }
-            while (menu != 6) ;
+        }
+        while (menu != 6);
 
     }
 }
