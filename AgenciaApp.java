@@ -55,15 +55,12 @@ public class AgenciaApp {
                 String status = JOptionPane.showInputDialog("Atualize o status(Aprovado - Reprovado): ");
                 int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto para atualizar: "));
 
-                if (projeto.atualizar(conn, codigo, status)) {
-                    JOptionPane.showMessageDialog(null, "Status atualizado!");
+                projeto.atualizar(conn, codigo, status);
+                JOptionPane.showMessageDialog(null, "Status atualizado!");
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Nao encontrado");
-                }
             }
+            }
+            while (menu != 6) ;
 
-        } while (menu != 6);
     }
-
 }

@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Projeto {
 
@@ -101,33 +102,20 @@ public class Projeto {
     }
 
     public boolean atualizar(Connection conn, int codigo, String status) {
-        String sqlUpdate =
-                "UPDATE Projetos SET Resposta_RESULTADO = "+ status + " WHERE codigo_interno = " + codigo;
-        PreparedStatement stm = null;
-        try {
-            stm = conn.prepareStatement(sqlUpdate);
-            stm.setString(1, getStatus());
-            stm.setInt(2, getCodigo());
+        ArrayList<Projeto> lista = new ArrayList<>();
+        String sqlUpdate = "UPDATE Projetos SET Resposta_RESULTADO = "+ status + " WHERE codigo_interno = " + codigo;
+        Projeto projeto = null;
+        try (PreparedStatement stm = conn.prepareStatement(sqlUpdate);
 
-            stm.execute();
-        } catch (Exception e) {
+             ResultSet rs = stm.executeQuery(sqlUpdate);) {
+                    stm.setString(1, getStatus());
+                    stm.execute();
+        } catch (SQLException e) {
             e.printStackTrace();
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                System.out.print(e1.getStackTrace());
-            }
-        } finally {
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e1) {
-                    System.out.print(e1.getStackTrace());
-                }
-            }
         }
         return false;
     }
+
 
     public void incluir(Connection conn) {
         String sqlInsert =
