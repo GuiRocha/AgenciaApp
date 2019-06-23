@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -93,6 +92,41 @@ public class Projeto {
 //trunca se for maior
             this.status = status.substring(0, 144);
         }
+    }
+
+    public boolean deletarProjetoPorCodigo(Connection conn, int codigo) throws Exception {
+        String delete = "DELETE from Projetos where codigo_interno = " + codigo;
+        Statement statement = conn.createStatement();
+        return statement.execute(delete);
+    }
+
+    public boolean atualizar(Connection conn, int codigo, String status) {
+        String sqlUpdate =
+                "UPDATE Projetos SET Resposta_RESULTADO = "+ status + " WHERE codigo_interno = " + codigo;
+        PreparedStatement stm = null;
+        try {
+            stm = conn.prepareStatement(sqlUpdate);
+            stm.setString(1, getStatus());
+            stm.setInt(2, getCodigo());
+
+            stm.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                System.out.print(e1.getStackTrace());
+            }
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e1) {
+                    System.out.print(e1.getStackTrace());
+                }
+            }
+        }
+        return false;
     }
 
     public void incluir(Connection conn) {

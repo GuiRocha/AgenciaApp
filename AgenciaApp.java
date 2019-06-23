@@ -27,8 +27,6 @@ public class AgenciaApp {
 
                 AreaConhecimento conhecimento = new AreaConhecimento(Integer.valueOf(idArea), descArea);
 
-                //GrandeAreaConhecimento grandeConhecimento = new GrandeAreaConhecimento(Integer.valueOf(idGrandeA), descGrandeA, conhecimento);
-
                 projeto = new Projeto(nome, duracao, codigo, areaPesquisa);
 
                 projeto.incluir(conn);
@@ -37,7 +35,7 @@ public class AgenciaApp {
                 if (projotas == Collections.EMPTY_LIST) {
                     JOptionPane.showMessageDialog(null, "Não encontrado");
                 } else {
-                    JOptionPane.showMessageDialog(null, projeto);
+                    JOptionPane.showMessageDialog(null, projotas);
                 }
 
             } else if (menu == 3) {
@@ -49,15 +47,15 @@ public class AgenciaApp {
 
             } else if (menu == 4) {
                 int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código para remover:"));
-                boolean removed = agencia.deletarProjetoPorCodigo(conn, codigo);
+                boolean removed = projeto.deletarProjetoPorCodigo(conn, codigo);
                 if (removed) {
                     JOptionPane.showMessageDialog(null, "Removido");
                 }
             } else if (menu == 5) {
                 String status = JOptionPane.showInputDialog("Atualize o status(Aprovado - Reprovado): ");
-                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto para atualizar:"));
+                int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código do projeto para atualizar: "));
 
-                if (agencia.status(codigo, status)) {
+                if (projeto.atualizar(conn, codigo, status)) {
                     JOptionPane.showMessageDialog(null, "Status atualizado!");
 
                 } else {

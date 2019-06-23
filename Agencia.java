@@ -90,7 +90,7 @@ public class Agencia {
 
         try (PreparedStatement stm = conn.prepareStatement(sqlSelect);
              ResultSet rs = stm.executeQuery();) {
-            //veja que desta vez foi possivel usar o mesmo try
+
             while (rs.next()) {
                 projeto = new Projeto(
                         rs.getString("NOME"),
@@ -102,10 +102,12 @@ public class Agencia {
             }
         }
         catch(Exception e){
-                e.printStackTrace();
-            }
-            return projeto;
+            e.printStackTrace();
         }
+        return projeto;
+    }
+
+
 
     public ArrayList<Projeto> buscarProjetos(Connection conn) {
         String sqlSelect = "SELECT NOME, DURACAO, CODIGO_INTERNO, AREA_DE_PESQUISA, Resposta_RESULTADO FROM Projetos";
@@ -129,11 +131,6 @@ public class Agencia {
         }
         return lista;
     }
-    public boolean deletarProjetoPorCodigo(Connection conn, int codigo) throws Exception {
-        String delete = "DELETE from Projetos where codigo_interno = " + codigo;
-        Statement statement = conn.createStatement();
-        return statement.execute(delete);
-    }
 
-        //return projeto;
-    }
+    //return projeto;
+}
